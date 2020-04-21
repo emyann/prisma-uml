@@ -1,0 +1,85 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/repo
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run:
+          name: Build
+          command: yarn build
+      - save_cache:
+          paths:
+            - dist
+          key: v1-dist-{{ .Environment.CIRCLE_SHA1 }}
+  test:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/repo
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run:
+          name: Test
+          command: yarn test
+
+  publish:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - restore_cache:
+          keys:
+            - v1-dist-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Publish Package
+          command: cd dist && yarn run semantic-release
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+      - test
+      # - publish:
+      #     requires:
+      #       - build
+      #       - test
+      #     filters:
+      #       branches:
+      #         only:
+      #           - next
+      #           - master
+      #           - beta
