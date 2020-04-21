@@ -14,6 +14,8 @@
 - [ ] Group relations by entities.
 - [ ] NextJs Preview that run the CLI on server to render a prisma schema to a plantUML ERD
 - [ ] Put `@prisma/sdk` as PeerDependencies (support starts a beta-2)
+- [ ] Add CircleCLI
+- [ ] Add semantic-release
 
 ## Authors
 
