@@ -1,3 +1,3 @@
-export * from './common';
-export * from './enum/prismaEnumToPlantUMLEnum';
-export * from './entity/prismaModelToPlantUMLEntity';
+export { prismaEnumToPlantUMLEnum } from './enum/prismaEnumToPlantUMLEnum';
+export { prismaModelToPlantUMLEntity } from './entity/prismaModelToPlantUMLEntity';
+export { prismaToPlantUML, plantUMLRelationToString, loadPrismaSchema } from './prismaToPlantUML';
