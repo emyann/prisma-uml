@@ -1,10 +1,11 @@
 import { DMMF } from '@prisma/generator-helper';
+import { getDMMF } from '@prisma/sdk';
 import { prismaEnumToPlantUMLEnum } from './enum/prismaEnumToPlantUMLEnum';
 import { prismaModelToPlantUMLEntity } from './entity/prismaModelToPlantUMLEntity';
 import { addNewLine, StringBuilderArtifact } from './common';
 import { getPlantUMLGraphFromPrismaDatamodel, isEnum, isModel, Cardinality } from './graph/getPlantUMLGraphFromPrismaDatamodel';
 
-interface PlantUMLRelation {
+export interface PlantUMLRelation {
   start: DMMF.Model | DMMF.DatamodelEnum;
   cardinality: Cardinality;
   end: DMMF.Model | DMMF.DatamodelEnum;
@@ -45,7 +46,7 @@ export function prismaToPlantUML(dmmf: DMMF.Document) {
   return builder.join('');
 }
 
-function plantUMLRelationToString(relation: PlantUMLRelation) {
+export function plantUMLRelationToString(relation: PlantUMLRelation) {
   const builder = [];
   builder.push(
     relation.start.name,
@@ -57,4 +58,8 @@ function plantUMLRelationToString(relation: PlantUMLRelation) {
     relation.end.name
   );
   return builder.join('');
+}
+
+export function loadPrismaSchema(path: string) {
+  return getDMMF({ datamodelPath: path });
 }
