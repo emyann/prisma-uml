@@ -73,13 +73,13 @@ workflows:
     jobs:
       - build
       - test
-      # - publish:
-      #     requires:
-      #       - build
-      #       - test
-      #     filters:
-      #       branches:
-      #         only:
-      #           - next
-      #           - master
-      #           - beta
+      - publish:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only:
+                - next
+                - master
+                - beta
