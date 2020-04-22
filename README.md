@@ -2,7 +2,7 @@
 
 > A CLI to transform a Prisma schema to a PlantUML Entity RelationShip Diagram
 
-[![npm](https://img.shields.io/npm/v/prisma-uml.svg?style=for-the-badge)](https://www.npmjs.com/package/prisma-uml) [![npm](https://img.shields.io/npm/dy/prisma-uml.svg?style=for-the-badge)](https://npm-stat.com/charts.html?package=prisma-uml) [![CircleCI (all branches)](https://img.shields.io/circleci/project/github/emyann/prisma-plantuml/master.svg?style=for-the-badge)](https://circleci.com/gh/emyann/prisma-plantuml)
+[![npm](https://img.shields.io/npm/v/prisma-uml.svg?style=for-the-badge)](https://www.npmjs.com/package/prisma-uml) [![npm](https://img.shields.io/npm/dy/prisma-uml.svg?style=for-the-badge)](https://npm-stat.com/charts.html?package=prisma-uml) [![CircleCI (all branches)](https://img.shields.io/circleci/project/github/emyann/prisma-uml/master.svg?style=for-the-badge)](https://circleci.com/gh/emyann/prisma-uml)
 
 - [Installation](#installation)
 - [Commands](#commands)
@@ -41,7 +41,7 @@ prisma-uml --help
 > **Generate a plantUML from a Prisma schema**
 
 ```sh
-prisma-uml <path> [--output]
+prisma-uml <path> [--output] [--server] [--file]
 ```
 
 **Argument**
