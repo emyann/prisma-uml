@@ -7,6 +7,9 @@
 - [Installation](#installation)
 - [Commands](#commands)
   - [`prisma-uml <path> [options]`](#prisma-uml-path-options)
+- [Image Rendering](#image-rendering)
+  - [Using the official PlantUML server online](#using-the-official-plantuml-server-online)
+  - [Using a local server with Docker](#using-a-local-server-with-docker)
 - [Demo](#demo)
 - [Incoming changes](#incoming-changes)
 - [Authors](#authors)
@@ -49,9 +52,11 @@ prisma-uml <path> [--output]
 
 **Options**
 
-| Name         | Alias | Description | default |
-| ------------ | ----- | ----------- | ------- |
-| **--output** | -o    | text        | text    |
+| Name         | Alias | Description                          | Type / Choices                       | Default                           |
+| ------------ | ----- | ------------------------------------ | ------------------------------------ | --------------------------------- |
+| **--output** | -o    | Output of the diagram                | string / [text \| svg \| png \| jpg] | text                              |
+| **--server** | -s    | PlantUML Server URL                  | string                               | https://www.plantuml.com/plantuml |
+| **--file**   | -f    | Filename or File full path to output | string                               |                                   |
 
 <details><summary><strong>Examples</strong></summary>
 <p>
@@ -59,10 +64,42 @@ prisma-uml <path> [--output]
 ```sh
 # Output a plantUML Entity Relation Diagram as text
 prisma-uml ./schema.prisma
+
+# Save the diagram into a .plantuml file
+prisma-uml ./schema.prisma > my-erd.plantuml
+
+# Output a diagram as SVG
+prisma-uml ./schema.prisma --output svg --file my-erd.svg
+
+# Output a diagram as PNG
+prisma-uml ./schema.prisma -o png -f my-erd.png
+
+#  Use a plantUML custom server to render the image
+prisma-uml ./schema.prisma --server http://localhost:8080
 ```
 
 </p>
 </details>
+
+## Image Rendering
+
+### Using the official PlantUML server online
+
+PlantUML usually requires to have Java installed or a server to render the images. By default the official online server (https://www.plantuml.com/plantuml) is used to render the images. The plantUML diagram is first compressed then encoded ([plantUML encoding](https://plantuml.com/fr/code-javascript-synchronous)) and finally sent to the server to execute the rendering.
+
+### Using a local server with Docker
+
+You might prefer to not send you diagram over the wire for some reason, `prisma-uml` allows you to specify a custom/local server. You could easily run your own local server using Docker:
+
+```sh
+docker run -d -p 8080:8080 plantuml/plantuml-server:jetty
+```
+
+You server is now available (depending of you Docker installation) at `http://localhost:8080`. You can then use `prisma-uml` as follow:
+
+```sh
+prisma-uml ./schema.prisma --server http://localhost:8080
+```
 
 ## Demo
 
@@ -70,8 +107,7 @@ prisma-uml ./schema.prisma
 
 ## Incoming changes
 
-- [ ] Allow to output UML as PNG, JPEG, SVG, WSD...
-- [ ] Split fields into entity (scalar, enum, navigation fields / external type).
+- [ ] Split attributes by entity (scalar, enum, navigation fields / external type).
 - [ ] Group relations by entities.
 - [ ] NextJs Preview that run the CLI on server to render a prisma schema to a plantUML ERD ?
 - [ ] Put `@prisma/sdk` as PeerDependencies (support starts a beta-2)
