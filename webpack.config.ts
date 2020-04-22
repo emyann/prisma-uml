@@ -11,7 +11,6 @@ const webpackconfiguration: webpack.Configuration = {
   entry: path.resolve(__dirname, 'src', 'index.ts'),
   target: 'node',
   externals: [nodeExternals()],
-  devtool: isProd ? 'hidden-source-map' : 'source-map',
   output: {
     filename: 'prisma-uml.js',
     path: path.resolve(__dirname, 'dist'),
