@@ -1,0 +1,123 @@
+model Module {
+  id                      String     @default(cuid()) @id
+  slug                    String     @default(cuid()) @unique
+  title                   String?
+  description             String?
+  courses                 Course[]   @relation(references: [id])
+  unlockedInTrainings     Training[] @relation(references: [id])
+  lessons                 Lesson[]
+  links                   Link[]
+  creator                 User       @relation("createdModules", fields: [creatorId], references: [id])
+  creatorId               String
+  sharedWith              User[]     @relation("sharedModules", references: [id])
+  isSharedWithAllTrainers Boolean
+  isSharedWithAllUsers    Boolean
+  userTrainingSessionId   String?
+}
+
+model User {
+  id                    String                @default(cuid()) @id
+  email                 String                @unique
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  role                  Role
+  enabled               Boolean
+  fullName              String
+  location              String?
+  referred              String?
+  companyName           String?
+  password              String
+  createdTrainings      Training[]            @relation("createdTrainings")
+  attendedTrainings     UserTrainingSession[] @relation("userTrainingSession")
+  createdCourses        Course[]              @relation("createdCourses")
+  sharedCourses         Course[]              @relation("sharedCourses", references: [id])
+  createdModules        Module[]              @relation("createdModules")
+  sharedModules         Module[]              @relation("sharedModules", references: [id])
+  sentCourseInvites     CourseInvite[]        @relation("fromUserCourse")
+  receivedCourseInvites CourseInvite[]        @relation("toUserCourses")
+}
+
+model Course {
+  id                      String         @default(cuid()) @id
+  slug                    String         @default(cuid()) @unique
+  modules                 Module[]       @relation(references: [id])
+  title                   String
+  trainings               Training[]
+  creator                 User           @relation(fields: [creatorId], references: [id])
+  creatorId               String
+  sharedWith              User[]         @relation("sharedCourses", references: [id])
+  isSharedWithAllTrainers Boolean
+  isSharedWithAllUsers    Boolean
+  modulesIdByOrder        String
+  invites                 CourseInvite[] @relation("courseInvite")
+  userId                  String?
+}
+
+model CourseInvite {
+  id         String  @default(cuid()) @id
+  fromUser   User    @relation("fromUserCourses", fields: [fromUserId], references: [id])
+  toUser     User    @relation("toUserCourses", fields: [toUserId], references: [id])
+  fromUserId String
+  toUserId   String
+  course     Course  @relation("courseInvite", fields: [courseId], references: [id])
+  courseId   String
+  userId     String?
+}
+
+model Lesson {
+  id                    String  @default(cuid()) @id
+  slug                  String  @default(cuid()) @unique
+  title                 String
+  markdown              String
+  embedUrl              String
+  module                Module  @relation(fields: [moduleId], references: [id])
+  moduleId              String
+  order                 Int?
+  userTrainingSessionId String?
+}
+
+model Link {
+  id       String @default(cuid()) @id
+  url      String
+  title    String
+  module   Module @relation(fields: [moduleId], references: [id])
+  moduleId String
+}
+
+model UserTrainingSession {
+  id               String   @default(cuid()) @id
+  user             User     @relation("userTrainingSession", fields: [userId], references: [id])
+  userId           String
+  training         Training @relation("trainingSession", fields: [trainingId], references: [id])
+  trainingId       String
+  completedModules Module[]
+  completedLessons Lesson[]
+}
+
+model Training {
+  id              String                @default(cuid()) @id
+  slug            String                @default(cuid()) @unique
+  dateEnd         DateTime?
+  dateStart       DateTime?
+  name            String?
+  course          Course?               @relation(fields: [courseId], references: [id])
+  courseId        String?
+  createdBy       User                  @relation("createdTrainings", fields: [createdById], references: [id])
+  createdById     String
+  attendingUsers  UserTrainingSession[] @relation("trainingSession")
+  unlockedModules Module[]              @relation(references: [id])
+  secretKey       String                @unique
+  type            TrainingType
+}
+
+enum Role {
+  ADMIN
+  USER
+  CREATOR
+}
+
+enum TrainingType {
+  ONLINE
+  INPERSON
+  COURSE
+}
