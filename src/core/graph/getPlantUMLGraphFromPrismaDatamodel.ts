@@ -50,7 +50,6 @@ export function getPlantUMLGraphFromPrismaDatamodel(datamodel: DMMF.Datamodel) {
           stack.push('o');
         }
         const targetVertex = graph.getVertexByKey(field.type);
-
         if (isEnum(targetVertex.value)) {
           stack.push('|', '|');
         } else if (isModel(targetVertex.value)) {
@@ -74,11 +73,12 @@ export function getPlantUMLGraphFromPrismaDatamodel(datamodel: DMMF.Datamodel) {
             cardinality.end += stack.pop();
           }
         }
-        return { targetVertex, cardinality };
+        return { field, cardinality };
       })
-      .map(({ targetVertex, cardinality }) => {
-        const idFormat = `${sourceVertex.value.name}.${targetVertex.value.name}`;
+      .map(({ field, cardinality }) => {
+        let idFormat = `${sourceVertex.value.name}.${field.name}.${field.relationName}`;
         const edgeId = uuidv5(idFormat, RELATIONS_ID_NAMESPACE);
+        const targetVertex = graph.getVertexByKey(field.type);
 
         return new GraphEdge<GraphEntity, Relation>(sourceVertex, targetVertex, { id: edgeId, cardinality }, edgeKeyExtractor);
       });

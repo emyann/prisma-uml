@@ -68,7 +68,7 @@ const handler = async (args: Arguments) => {
   const prismaSchemaPath = args[CommandArgument.Path]!;
   const output = args[CommandOptions.Output]! as OutputType;
   const server = args[CommandOptions.Server]!;
-  const file = args[CommandOptions.File]!; // TODO: Check if file is provided when output is provided,
+  const file = args[CommandOptions.File]!;
 
   const dmmf = await loadPrismaSchema(prismaSchemaPath);
   const plantUML = prismaToPlantUML(dmmf);

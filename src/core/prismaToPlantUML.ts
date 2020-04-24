@@ -21,17 +21,13 @@ export function prismaToPlantUML(dmmf: DMMF.Document) {
     .filter((vertex) => isModel(vertex.value))
     .map((vertexModel) => (isModel(vertexModel.value) ? prismaModelToPlantUMLEntity(vertexModel.value) : undefined));
 
-  const relationIdsDedupMap: Record<string, string> = {};
   const relations = graph.getAllVertices().reduce<PlantUMLRelation[]>((acc, vertex) => {
     vertex.getEdges().forEach((edge) => {
-      if (!(edge.value.id in relationIdsDedupMap)) {
-        acc.push({
-          start: edge.startVertex.value,
-          cardinality: edge.value.cardinality,
-          end: edge.endVertex.value,
-        });
-        relationIdsDedupMap[edge.value.id] = edge.value.id;
-      }
+      acc.push({
+        start: edge.startVertex.value,
+        cardinality: edge.value.cardinality,
+        end: edge.endVertex.value,
+      });
     });
     return acc;
   }, []);
