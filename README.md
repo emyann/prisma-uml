@@ -112,8 +112,8 @@ prisma-uml ./schema.prisma --server http://localhost:8080
 - [ ] Feat: NextJs Preview that run the CLI on server to render a prisma schema to a plantUML ERD ?
 - [ ] Feat: Display Version Number
 - [ ] Feat: Handle `-o text -f my-erd.puml|.wsd|.plantuml...`
-- [ ] Fix: Left side / Start leaf have wrong order on `o|`
 - [ ] Remove `--output` in favor of extension handling (.svg, .png, .jpg, .puml...) (?)
+- [ ] Feat: Add logging to stdout to describe what the CLI is doing
 
 ## Authors
 
