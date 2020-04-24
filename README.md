@@ -89,7 +89,7 @@ PlantUML usually requires to have Java installed or a server to render the image
 
 ### Using a local server with Docker
 
-You might prefer to not send you diagram over the wire for some reason, `prisma-uml` allows you to specify a custom/local server. You could easily run your own local server using Docker:
+You might want to avoid sending your diagram over the wire for some reason, `prisma-uml` allows you to specify a custom/local server. You could easily run your own local server using Docker:
 
 ```sh
 docker run -d -p 8080:8080 plantuml/plantuml-server:jetty
@@ -107,10 +107,14 @@ prisma-uml ./schema.prisma --server http://localhost:8080
 
 ## Incoming changes
 
-- [ ] Split attributes by entity (scalar, enum, navigation fields / external type).
-- [ ] Group relations by entities.
-- [ ] NextJs Preview that run the CLI on server to render a prisma schema to a plantUML ERD ?
-- [ ] Put `@prisma/sdk` as PeerDependencies (support starts a beta-2)
+- [ ] Feat: Split attributes by entity (scalar, enum, navigation fields / external type).
+- [ ] Feat: Group relations by entities.
+- [ ] Feat: NextJs Preview that run the CLI on server to render a prisma schema to a plantUML ERD ?
+- [ ] Feat: Display Version Number
+- [ ] Feat: Handle `-o text -f my-erd.puml|.wsd|.plantuml...`
+- [ ] Fix: Allow several field navigation toward the same entity (Discriminate ID generation)
+- [ ] Fix: Left side / Start leaf have wrong order on `o|`
+- [ ] Remove `--output` in favor of extension handling (.svg, .png, .jpg, .puml...) (?)
 
 ## Authors
 
