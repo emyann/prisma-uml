@@ -34,6 +34,7 @@ export function prismaToPlantUML(dmmf: DMMF.Document) {
 
   const builder = [];
   builder.push(addNewLine('@startuml', 2));
+  builder.push(addNewLine('skinparam linetype ortho', 2));
   builder.push(enums.concat(entities).join(`${StringBuilderArtifact.Breakline}${StringBuilderArtifact.Breakline}`)); // Add Enums and Entities
   builder.push(addNewLine('', 2));
   builder.push(relations.map(plantUMLRelationToString).join(StringBuilderArtifact.Breakline));
