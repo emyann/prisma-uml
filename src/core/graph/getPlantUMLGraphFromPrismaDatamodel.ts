@@ -54,15 +54,15 @@ export function getPlantUMLGraphFromPrismaDatamodel(datamodel: DMMF.Datamodel) {
           stack.push('|', '|');
         } else if (isModel(targetVertex.value)) {
           const oppositeField = targetVertex.value.fields.find((field) => field.type === model.name);
-          if (oppositeField?.isList) {
-            stack.push('}');
-          } else {
-            stack.push('|');
-          }
           if (oppositeField?.isRequired) {
             stack.push('|');
           } else {
             stack.push('o');
+          }
+          if (oppositeField?.isList) {
+            stack.push('}');
+          } else {
+            stack.push('|');
           }
         }
         const cardinality: Relation['cardinality'] = { start: '', end: '' };
