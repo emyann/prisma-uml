@@ -114,6 +114,7 @@ prisma-uml ./schema.prisma --server http://localhost:8080
 - [ ] Feat: Handle `-o text -f my-erd.puml|.wsd|.plantuml...`
 - [ ] Fix: Left side / Start leaf have wrong order on `o|`
 - [ ] Remove `--output` in favor of extension handling (.svg, .png, .jpg, .puml...) (?)
+- [ ] Fix: Multiple cardinalities when should be online one (see simple example)
 
 ## Authors
 
