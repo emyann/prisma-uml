@@ -11,7 +11,6 @@ model User {
   id        String  @default(cuid()) @id
   firstName String?
   lastName  String?
-  mainDogs  Dog[]   @relation("mainDogs")
   dogs      Dog[]
   profile   Profile
 }
@@ -24,11 +23,10 @@ model Profile {
 }
 
 model Dog {
-  id      String  @default(cuid()) @id
-  owner   User    @relation(fields: [ownerId], references: [id])
-  ownerId String
-  breed   Breed
-  userId  String?
+  id     String  @default(cuid()) @id
+  breed  Breed
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
 }
 
 enum Breed {

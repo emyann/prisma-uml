@@ -9,6 +9,8 @@ describe('Entity', () => {
       isEmbedded: false,
       name: 'MyModel',
       fields: [],
+      uniqueFields: [],
+      uniqueIndexes: [],
     };
 
     const expected = `entity MyModel {
@@ -22,12 +24,15 @@ describe('Entity', () => {
       dbName: '',
       idFields: [],
       isEmbedded: false,
+      uniqueFields: [],
+      uniqueIndexes: [],
       name: 'MyModel',
       fields: [
         {
           name: 'Field1',
           type: 'String',
           kind: 'scalar',
+          hasDefaultValue: false,
           isList: false,
           isRequired: false,
           isUnique: false,
@@ -51,11 +56,14 @@ describe('Entity', () => {
       idFields: [],
       isEmbedded: false,
       name: 'MyModel',
+      uniqueFields: [],
+      uniqueIndexes: [],
       fields: [
         {
           name: 'Field1',
           type: 'String',
           kind: 'scalar',
+          hasDefaultValue: false,
           isList: false,
           isRequired: true,
           isUnique: false,
@@ -79,11 +87,14 @@ describe('Entity', () => {
       idFields: [],
       isEmbedded: false,
       name: 'MyModel',
+      uniqueFields: [],
+      uniqueIndexes: [],
       fields: [
         {
           name: 'Field1',
           type: 'String',
           kind: 'scalar',
+          hasDefaultValue: false,
           isList: true,
           isRequired: true,
           isUnique: false,
