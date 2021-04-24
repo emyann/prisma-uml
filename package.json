@@ -18,7 +18,7 @@
     "semantic-release": "semantic-release",
     "test": "jest",
     "snyk-protect": "snyk protect",
-    "prepare": "yarn run snyk-protect"
+    "prepare": "yarn run snyk-protect && husky install"
   },
   "release": {
     "branches": [
@@ -52,7 +52,9 @@
     "@types/webpack": "^4.41.12",
     "@types/yargs": "^15.0.4",
     "babel-loader": "^8.1.0",
+    "husky": ">=6",
     "jest": "^25.3.0",
+    "lint-staged": ">=10",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
     "semantic-release": "^17.0.7",
@@ -75,5 +77,14 @@
     "uuid": "^8.3.2",
     "yargs": "^16.2.0"
   },
-  "snyk": true
+  "snyk": true,
+  "lint-staged": {
+    "*.{ts,js,css,md}": "prettier --write"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
 }
