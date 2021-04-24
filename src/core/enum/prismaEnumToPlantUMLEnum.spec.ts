@@ -1,5 +1,5 @@
-import { DMMF } from '@prisma/generator-helper';
-import { prismaEnumToPlantUMLEnum } from './prismaEnumToPlantUMLEnum';
+import { DMMF } from '@prisma/generator-helper'
+import { prismaEnumToPlantUMLEnum } from './prismaEnumToPlantUMLEnum'
 
 describe('Enums', () => {
   it('should transform a prisma enum to a plantUML enum', () => {
@@ -9,14 +9,14 @@ describe('Enums', () => {
         { name: 'Value1', dbName: '' },
         { name: 'Value2', dbName: '' },
       ],
-    };
+    }
 
-    const result = prismaEnumToPlantUMLEnum(prismaEnum);
+    const result = prismaEnumToPlantUMLEnum(prismaEnum)
     expect(result).toMatchInlineSnapshot(`
       "enum MyEnum {
         Value1
         Value2
       }"
-    `);
-  });
-});
+    `)
+  })
+})
