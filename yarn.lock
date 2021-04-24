@@ -1417,7 +1417,7 @@
   dependencies:
     "@prisma/debug" "2.21.2"
 
-"@prisma/sdk@^2.3.0":
+"@prisma/sdk@^2.21.2":
   version "2.21.2"
   resolved "https://registry.yarnpkg.com/@prisma/sdk/-/sdk-2.21.2.tgz#f983998febc529ba7733ac6760c3f7d89538920d"
   integrity sha512-m35JPEGYOnldBrIGpKdwxP/xER0S4vpk7L/qiLZGW6kVMcJRaeUGEONzmgaXtAXn6dP2BopsQ0UheCs3aF8uiQ==
@@ -10073,7 +10073,7 @@ snyk-try-require@^2.0.0:
     lodash.clonedeep "^4.3.0"
     lru-cache "^5.1.1"
 
-snyk@^1.465.0:
+snyk@^1.563.0:
   version "1.563.0"
   resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.563.0.tgz#e75341b68751f6ad37f97b9e3f06145d20056870"
   integrity sha512-o0Cb8JR70NzR4OLDKJDx04zj9Cq4gKhFLvQxU1MxZv0Hko7K6FmMDxdgyljd3nU5wl1QyVNdnug1H4XaHfhhvA==

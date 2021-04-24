@@ -42,6 +42,15 @@
   "homepage": "https://github.com/emyann/prisma-uml",
   "author": "Yann Renaudin",
   "license": "MIT",
+  "dependencies": {
+    "@prisma/sdk": "^2.21.2",
+    "axios": "^0.21.1",
+    "chalk": "^4.1.0",
+    "snyk": "^1.563.0",
+    "typescript-generic-datastructures": "^1.3.0",
+    "uuid": "^8.3.2",
+    "yargs": "^16.2.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
@@ -67,15 +76,6 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-node-externals": "^1.7.2"
-  },
-  "dependencies": {
-    "@prisma/sdk": "^2.3.0",
-    "axios": "^0.21.1",
-    "chalk": "^4.1.0",
-    "snyk": "^1.465.0",
-    "typescript-generic-datastructures": "^1.3.0",
-    "uuid": "^8.3.2",
-    "yargs": "^16.2.0"
   },
   "snyk": true,
   "lint-staged": {
