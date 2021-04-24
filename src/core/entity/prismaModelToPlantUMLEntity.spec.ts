@@ -1,37 +1,38 @@
-import { DMMF } from '@prisma/generator-helper';
-import { prismaModelToPlantUMLEntity } from './prismaModelToPlantUMLEntity';
+import { DMMF } from "@prisma/generator-helper";
+import { prismaModelToPlantUMLEntity } from "./prismaModelToPlantUMLEntity";
 
-describe('Entity', () => {
-  it('should transform a prisma model to plantUML entity', () => {
+describe("Entity", () => {
+  it("should transform a prisma model to plantUML entity", () => {
     const model: DMMF.Model = {
-      dbName: '',
+      dbName: "",
       idFields: [],
       isEmbedded: false,
-      name: 'MyModel',
+      name: "MyModel",
       fields: [],
       uniqueFields: [],
       uniqueIndexes: [],
     };
 
-    const expected = `entity MyModel {
-}`;
     const result = prismaModelToPlantUMLEntity(model);
-    expect(result).toEqual(expected);
+    expect(result).toMatchInlineSnapshot(`
+      "entity MyModel {
+      }"
+    `);
   });
 
-  it('should add a question mark on optional field', () => {
+  it("should add a question mark on optional field", () => {
     const model: DMMF.Model = {
-      dbName: '',
+      dbName: "",
       idFields: [],
       isEmbedded: false,
       uniqueFields: [],
       uniqueIndexes: [],
-      name: 'MyModel',
+      name: "MyModel",
       fields: [
         {
-          name: 'Field1',
-          type: 'String',
-          kind: 'scalar',
+          name: "Field1",
+          type: "String",
+          kind: "scalar",
           hasDefaultValue: false,
           isList: false,
           isRequired: false,
@@ -42,27 +43,28 @@ describe('Entity', () => {
         },
       ],
     };
-    const expected = `entity MyModel {
-  Field1: String?
-}`;
     const result = prismaModelToPlantUMLEntity(model);
 
-    expect(result).toEqual(expected);
+    expect(result).toMatchInlineSnapshot(`
+      "entity MyModel {
+        Field1: String?
+      }"
+    `);
   });
 
-  it('should suffix a field by an asterisk(*) when required', () => {
+  it("should suffix a field by an asterisk(*) when required", () => {
     const model: DMMF.Model = {
-      dbName: '',
+      dbName: "",
       idFields: [],
       isEmbedded: false,
-      name: 'MyModel',
+      name: "MyModel",
       uniqueFields: [],
       uniqueIndexes: [],
       fields: [
         {
-          name: 'Field1',
-          type: 'String',
-          kind: 'scalar',
+          name: "Field1",
+          type: "String",
+          kind: "scalar",
           hasDefaultValue: false,
           isList: false,
           isRequired: true,
@@ -73,27 +75,29 @@ describe('Entity', () => {
         },
       ],
     };
-    const expected = `entity MyModel {
-  * Field1: String
-}`;
+
     const result = prismaModelToPlantUMLEntity(model);
 
-    expect(result).toEqual(expected);
+    expect(result).toMatchInlineSnapshot(`
+      "entity MyModel {
+        * Field1: String
+      }"
+    `);
   });
 
-  it('should suffix a field by brackets when isList', () => {
+  it("should suffix a field by brackets when isList", () => {
     const model: DMMF.Model = {
-      dbName: '',
+      dbName: "",
       idFields: [],
       isEmbedded: false,
-      name: 'MyModel',
+      name: "MyModel",
       uniqueFields: [],
       uniqueIndexes: [],
       fields: [
         {
-          name: 'Field1',
-          type: 'String',
-          kind: 'scalar',
+          name: "Field1",
+          type: "String",
+          kind: "scalar",
           hasDefaultValue: false,
           isList: true,
           isRequired: true,
@@ -104,11 +108,13 @@ describe('Entity', () => {
         },
       ],
     };
-    const expected = `entity MyModel {
-  * Field1: String[]
-}`;
+
     const result = prismaModelToPlantUMLEntity(model);
 
-    expect(result).toEqual(expected);
+    expect(result).toMatchInlineSnapshot(`
+      "entity MyModel {
+        * Field1: String[]
+      }"
+    `);
   });
 });

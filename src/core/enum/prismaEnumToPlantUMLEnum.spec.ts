@@ -10,11 +10,13 @@ describe('Enums', () => {
         { name: 'Value2', dbName: '' },
       ],
     };
-    const expected = `enum MyEnum {
-  Value1
-  Value2
-}`;
+
     const result = prismaEnumToPlantUMLEnum(prismaEnum);
-    expect(result).toEqual(expected);
+    expect(result).toMatchInlineSnapshot(`
+      "enum MyEnum {
+        Value1
+        Value2
+      }"
+    `);
   });
 });
