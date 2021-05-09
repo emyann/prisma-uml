@@ -18,17 +18,23 @@ export enum BlockType {
 }
 
 export function buildBlockHeader(type: BlockType, name: string) {
-  return [type, StringBuilderArtifact.WhiteSpace, name, StringBuilderArtifact.WhiteSpace, StringBuilderArtifact.OpenBrace].join('');
+  return [
+    type,
+    StringBuilderArtifact.WhiteSpace,
+    name,
+    StringBuilderArtifact.WhiteSpace,
+    StringBuilderArtifact.OpenBrace,
+  ].join('')
 }
 
 export function addTab(text: string) {
-  return text.padStart(text.length + 2, StringBuilderArtifact.WhiteSpace);
+  return text.padStart(text.length + 2, StringBuilderArtifact.WhiteSpace)
 }
 
 export function addNewLine(text: string, countOfLines: number = 1) {
-  const builder = [text];
+  const builder = [text]
   for (let i = 0; i < countOfLines; i++) {
-    builder.push(StringBuilderArtifact.Breakline);
+    builder.push(StringBuilderArtifact.Breakline)
   }
-  return builder.join('');
+  return builder.join('')
 }
