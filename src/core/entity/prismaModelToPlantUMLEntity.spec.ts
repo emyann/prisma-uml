@@ -4,6 +4,7 @@ import { prismaModelToPlantUMLEntity } from './prismaModelToPlantUMLEntity'
 describe('Entity', () => {
   it('should transform a prisma model to plantUML entity', () => {
     const model: DMMF.Model = {
+      primaryKey: { name: '', fields: [] },
       dbName: '',
       idFields: [],
       isEmbedded: false,
@@ -22,6 +23,7 @@ describe('Entity', () => {
 
   it('should add a question mark on optional field', () => {
     const model: DMMF.Model = {
+      primaryKey: { name: '', fields: [] },
       dbName: '',
       idFields: [],
       isEmbedded: false,
@@ -54,6 +56,7 @@ describe('Entity', () => {
 
   it('should suffix a field by an asterisk(*) when required', () => {
     const model: DMMF.Model = {
+      primaryKey: { name: '', fields: [] },
       dbName: '',
       idFields: [],
       isEmbedded: false,
@@ -87,6 +90,7 @@ describe('Entity', () => {
 
   it('should suffix a field by brackets when isList', () => {
     const model: DMMF.Model = {
+      primaryKey: { name: '', fields: [] },
       dbName: '',
       idFields: [],
       isEmbedded: false,
