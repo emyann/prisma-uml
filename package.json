@@ -66,7 +66,7 @@
     "snyk": "^1.667.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
-    "semantic-release": "^17.0.7",
+    "semantic-release": "^19.0.3",
     "source-map-loader": "^0.2.4",
     "ts-node-dev": "^1.0.0-pre.44",
     "tsconfig-paths": "^3.9.0",
